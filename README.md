@@ -207,3 +207,63 @@ Secara umum, optimasi berhasil meningkatkan performa karena:
 5. hasil JMeter menunjukkan penurunan sample time setelah optimasi.
 
 Dengan demikian, dapat disimpulkan bahwa proses refactoring dan optimasi berhasil memberikan peningkatan performa pada endpoint `/all-student`, `/all-student-name`, dan `/highest-gpa`.
+
+---
+
+## Reflection
+
+1. **What is the difference between the approach of performance testing with JMeter and profiling with IntelliJ Profiler in the context of optimizing application performance?**
+
+    JMeter digunakan untuk melihat performa aplikasi dari sisi luar, yaitu dari sudut pandang request yang dikirim ke endpoint. Dari JMeter, saya bisa melihat response time, throughput, error rate, dan apakah request berhasil dijalankan atau tidak.
+    
+    IntelliJ Profiler digunakan untuk melihat performa dari sisi dalam aplikasi. Profiler membantu melihat method mana yang memakan CPU time paling besar, bagian kode mana yang berat, dan proses mana yang menjadi bottleneck.
+    
+    Jadi, JMeter membantu mengetahui apakah endpoint lambat, sedangkan IntelliJ Profiler membantu mengetahui kenapa endpoint tersebut lambat.
+
+
+2. **How does the profiling process help you in identifying and understanding the weak points in your application?**
+
+    Profiling membantu saya melihat bagian kode yang paling banyak memakan waktu saat aplikasi berjalan. Dari hasil profiler, saya bisa melihat method mana yang memiliki CPU time tinggi dan bagian mana yang terlalu banyak melakukan proses.
+    
+    Hal ini membantu saya memahami weak point aplikasi secara lebih jelas. Misalnya, jika sebuah endpoint lambat karena mengambil terlalu banyak data dari database atau melakukan looping yang tidak efisien, hal tersebut bisa terlihat melalui profiler.
+
+
+3. **Do you think IntelliJ Profiler is effective in assisting you to analyze and identify bottlenecks in your application code?**
+
+    Ya, menurut saya IntelliJ Profiler efektif untuk membantu menemukan bottleneck. Profiler menampilkan informasi yang cukup jelas, seperti CPU time dan daftar method yang paling berat.
+    
+    Dengan informasi tersebut, saya bisa menentukan bagian mana yang perlu dioptimasi terlebih dahulu. Dalam tugas ini, profiler membantu saya menemukan method yang kurang efisien sehingga optimasi bisa dilakukan dengan lebih terarah.
+
+
+4. **What are the main challenges you face when conducting performance testing and profiling, and how do you overcome these challenges?**
+
+    Tantangan utama yang saya hadapi adalah memastikan semua persiapan sudah benar sebelum testing dilakukan. Aplikasi harus berjalan, database harus sudah terisi data, endpoint harus sesuai, dan konfigurasi JMeter harus benar.
+    
+    Tantangan lainnya adalah hasil testing bisa berubah-ubah karena kondisi laptop, jumlah data, atau proses lain yang sedang berjalan. Untuk mengatasinya, saya menjalankan test dengan kondisi yang semirip mungkin antara sebelum dan sesudah optimasi.
+    
+    Saya juga memastikan path endpoint benar, data sudah tersedia, dan hasil dari JMeter maupun IntelliJ Profiler dibandingkan secara hati-hati.
+
+
+5. **What are the main benefits you gain from using IntelliJ Profiler for profiling your application code?**
+
+    Manfaat utama dari IntelliJ Profiler adalah saya bisa melihat bagian kode yang paling berpengaruh terhadap performa aplikasi. Profiler membantu saya memahami proses yang terjadi di dalam aplikasi, bukan hanya melihat hasil akhirnya saja.
+    
+    Dengan profiler, proses optimasi menjadi lebih jelas karena saya tahu method mana yang perlu diperbaiki. Selain itu, saya juga bisa membandingkan CPU time sebelum dan sesudah optimasi untuk melihat apakah perubahan yang dilakukan benar-benar memberi dampak positif.
+
+
+6. **How do you handle situations where the results from profiling with IntelliJ Profiler are not entirely consistent with findings from performance testing using JMeter?**
+
+    Jika hasil dari IntelliJ Profiler dan JMeter tidak sepenuhnya sama, saya tidak langsung menganggap salah satu hasilnya salah. Keduanya melihat performa dari sisi yang berbeda.
+    
+    JMeter melihat performa dari sisi request dan response endpoint, sedangkan IntelliJ Profiler melihat proses internal di dalam aplikasi. Karena itu, saya membandingkan keduanya untuk mendapatkan gambaran yang lebih lengkap.
+    
+    Jika profiler menunjukkan CPU time sudah turun tetapi JMeter belum terlalu membaik, kemungkinan ada faktor lain seperti database, network lokal, jumlah data, atau konfigurasi test. Dalam kondisi seperti itu, saya akan mengecek ulang query database, konfigurasi JMeter, dan menjalankan test beberapa kali.
+
+
+7. **What strategies do you implement in optimizing application code after analyzing results from performance testing and profiling? How do you ensure the changes you make do not affect the application's functionality?**
+
+    Strategi optimasi yang saya lakukan adalah memperbaiki bagian kode yang paling berat terlebih dahulu berdasarkan hasil profiling. Contohnya, mengurangi proses looping yang tidak perlu, menggunakan query repository yang lebih spesifik, dan tidak mengambil data yang tidak dibutuhkan oleh endpoint.
+    
+    Untuk memastikan perubahan tidak merusak fungsi aplikasi, saya menjalankan aplikasi kembali dan mengecek endpoint yang sudah dioptimasi. Saya juga membandingkan output sebelum dan sesudah optimasi agar hasilnya tetap sesuai.
+    
+    Selain itu, saya melakukan performance test ulang menggunakan JMeter dan profiling ulang menggunakan IntelliJ Profiler untuk memastikan bahwa performa meningkat tanpa mengubah fungsi utama aplikasi.
